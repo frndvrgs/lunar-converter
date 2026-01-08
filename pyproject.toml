@@ -9,6 +9,11 @@ dependencies = [
     "questionary>=2.0.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.8.0",
+]
+
 [project.scripts]
 lunar-calc = "lunar_calc.__main__:main"
 

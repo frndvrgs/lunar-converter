@@ -1,14 +1,12 @@
 """Interactive CLI for calendar conversion using questionary."""
 
-from typing import Optional
-
 import questionary
 
 from .converters import gregorian_to_lunar, lunar_to_gregorian
 from .display import display_error, display_gregorian_to_lunar, display_lunar_to_gregorian
 
 
-def get_integer_input(prompt: str, min_val: int, max_val: int) -> Optional[int]:
+def get_integer_input(prompt: str, min_val: int, max_val: int) -> int | None:
     """
     Get validated integer input from user.
 
@@ -39,11 +37,11 @@ def get_integer_input(prompt: str, min_val: int, max_val: int) -> Optional[int]:
 
 
 def gregorian_to_lunar_flow() -> None:
-    """Handle the Gregorian to Lunar conversion flow."""
-    print("\n--- Gregorian to Chinese Lunar Calendar ---")
+    """Handle the Western to Lunar conversion flow."""
+    print("\n--- Western to Chinese Lunar Calendar ---")
 
     # Get date components
-    year = get_integer_input("Enter Gregorian year (e.g., 1990): ", 1900, 2100)
+    year = get_integer_input("Enter Western year (e.g., 1990): ", 1900, 2100)
     if year is None:
         return
 
@@ -81,8 +79,8 @@ def gregorian_to_lunar_flow() -> None:
 
 
 def lunar_to_gregorian_flow() -> None:
-    """Handle the Lunar to Gregorian conversion flow."""
-    print("\n--- Chinese Lunar to Gregorian Calendar ---")
+    """Handle the Lunar to Western conversion flow."""
+    print("\n--- Chinese Lunar to Western Calendar ---")
 
     # Get date components
     year = get_integer_input("Enter Lunar year (e.g., 1990): ", 1900, 2100)
@@ -98,9 +96,7 @@ def lunar_to_gregorian_flow() -> None:
         return
 
     # Ask about leap month
-    is_leap = questionary.confirm(
-        "Is this a leap month (闰月)?", default=False
-    ).ask()
+    is_leap = questionary.confirm("Is this a leap month (闰月)?", default=False).ask()
 
     # Ask if user wants to include time
     include_time = questionary.confirm(
@@ -130,14 +126,14 @@ def lunar_to_gregorian_flow() -> None:
 def run_cli() -> None:
     """Run the interactive CLI application."""
     print("\n🌙 Lunar Calendar Birthday Converter 🌙")
-    print("Convert between Gregorian and Chinese Lunar calendars\n")
+    print("Convert between Western and Chinese Lunar calendars\n")
 
     while True:
         choice = questionary.select(
             "Select conversion type:",
             choices=[
-                "Gregorian to Chinese Lunar",
-                "Chinese Lunar to Gregorian",
+                "Western to Chinese Lunar",
+                "Chinese Lunar to Western",
                 "Exit",
             ],
             use_arrow_keys=True,
@@ -147,9 +143,9 @@ def run_cli() -> None:
             print("\nGoodbye! 再见!\n")
             break
 
-        if choice == "Gregorian to Chinese Lunar":
+        if choice == "Western to Chinese Lunar":
             gregorian_to_lunar_flow()
-        elif choice == "Chinese Lunar to Gregorian":
+        elif choice == "Chinese Lunar to Western":
             lunar_to_gregorian_flow()
 
         # Add spacing before returning to menu
