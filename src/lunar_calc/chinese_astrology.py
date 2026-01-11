@@ -32,6 +32,22 @@ STEM_TO_ELEMENT = {
     "癸": "Water",  # Gui
 }
 
+# Mapping of Chinese Zodiac animals to English names with Pinyin
+ZODIAC_TO_ENGLISH = {
+    "鼠": "Rat (Shǔ)",
+    "牛": "Ox (Niú)",
+    "虎": "Tiger (Hǔ)",
+    "兔": "Rabbit (Tù)",
+    "龙": "Dragon (Lóng)",
+    "蛇": "Snake (Shé)",
+    "马": "Horse (Mǎ)",
+    "羊": "Goat (Yáng)",
+    "猴": "Monkey (Hóu)",
+    "鸡": "Rooster (Jī)",
+    "狗": "Dog (Gǒu)",
+    "猪": "Pig (Zhū)",
+}
+
 # Day of week names (indexed by Solar.getWeek(): 0=Sunday, 1=Monday, ..., 6=Saturday)
 WEEKDAY_NAMES = [
     "Sunday",
@@ -55,6 +71,19 @@ def get_cosmic_element(heavenly_stem: str) -> str:
         Element name (Wood, Fire, Earth, Metal, Water)
     """
     return STEM_TO_ELEMENT.get(heavenly_stem, "Unknown")
+
+
+def translate_zodiac_sign(chinese_sign: str) -> str:
+    """
+    Translate Chinese zodiac sign to English with Pinyin.
+
+    Args:
+        chinese_sign: Chinese character for zodiac animal
+
+    Returns:
+        English name with Pinyin, or original if not found
+    """
+    return ZODIAC_TO_ENGLISH.get(chinese_sign, chinese_sign)
 
 
 def get_chinese_astrology(lunar: Lunar) -> ChineseAstrology:
@@ -87,7 +116,8 @@ def get_chinese_astrology(lunar: Lunar) -> ChineseAstrology:
     chinese_year_name = lunar.getYearInChinese()
 
     # Get Chinese zodiac animal (e.g., "龙" Dragon)
-    chinese_year_sign = lunar.getYearShengXiao()
+    chinese_year_sign_chinese = lunar.getYearShengXiao()
+    chinese_year_sign = translate_zodiac_sign(chinese_year_sign_chinese)
 
     # Get Heavenly Stem and derive cosmic element
     heavenly_stem = lunar.getYearGan()
