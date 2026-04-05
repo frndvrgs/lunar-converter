@@ -29,7 +29,7 @@ For each conversion:
 ## API
 
 ```python
-from lunar_calc import gregorian_to_lunar, lunar_to_gregorian
+from lunar_converter import gregorian_to_lunar, lunar_to_gregorian
 
 result = gregorian_to_lunar(1990, 6, 15)
 result = lunar_to_gregorian(1990, 5, 23)
