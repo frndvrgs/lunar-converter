@@ -1,5 +1,7 @@
 # lunar-converter
 
+[![PyPI](https://img.shields.io/pypi/v/lunar-converter)](https://pypi.org/project/lunar-converter/)
+
 Gregorian and Chinese Lunar calendar converter with astrological details.
 
 ## Install
