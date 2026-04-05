@@ -1,17 +1,17 @@
-# lunar-calc
+# lunar-converter
 
 Gregorian and Chinese Lunar calendar converter with astrological details.
 
 ## Install
 
 ```bash
-pip install lunar-calc
+pip install lunar-converter
 ```
 
 ## Usage
 
 ```bash
-lunar-calc
+lunar-converter
 ```
 
 Interactive CLI with arrow-key navigation:
