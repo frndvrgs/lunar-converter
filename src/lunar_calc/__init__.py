@@ -1,4 +1,4 @@
-__version__ = "1.0.0"
+__version__ = "0.1.0"
 
 from .chinese_astrology import ChineseAstrology, get_chinese_astrology
 from .converters import (
