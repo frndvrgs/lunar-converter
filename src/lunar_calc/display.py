@@ -1,12 +1,7 @@
-"""Display formatting for calendar conversion results."""
-
 from .converters import GregorianToLunarResult, LunarToGregorianResult
 
 
-# ANSI color codes for enhanced terminal output
 class Colors:
-    """ANSI color codes for terminal output."""
-
     HEADER = "\033[95m"
     OKBLUE = "\033[94m"
     OKCYAN = "\033[96m"
@@ -19,22 +14,14 @@ class Colors:
 
 
 def format_time(hour: int | None, minute: int | None) -> str:
-    """Format time components into HH:MM string."""
     if hour is not None and minute is not None:
         return f"{hour:02d}:{minute:02d}"
     return "Not specified"
 
 
 def display_gregorian_to_lunar(result: GregorianToLunarResult) -> None:
-    """
-    Display the result of Gregorian to Lunar conversion with formatting.
-
-    Args:
-        result: GregorianToLunarResult object
-    """
     print(f"\n{Colors.BOLD}{'=' * 70}{Colors.ENDC}\n")
 
-    # Original Western Date Section
     print(f"{Colors.BOLD}{Colors.OKBLUE}WESTERN CALENDAR (Solar){Colors.ENDC}")
     print(
         f"{Colors.OKCYAN}Date:{Colors.ENDC} {result.gregorian_year}-{result.gregorian_month:02d}-{result.gregorian_day:02d}"
@@ -48,7 +35,6 @@ def display_gregorian_to_lunar(result: GregorianToLunarResult) -> None:
     )
     print()
 
-    # Converted Lunar Date Section
     print(f"{Colors.BOLD}{Colors.OKGREEN}CHINESE CALENDAR (Lunar){Colors.ENDC}")
     leap_indicator = (
         f" {Colors.WARNING}{result.chinese.leap_month_indicator}{Colors.ENDC}"
@@ -58,7 +44,6 @@ def display_gregorian_to_lunar(result: GregorianToLunarResult) -> None:
     print(
         f"{Colors.OKCYAN}Date:{Colors.ENDC} {result.lunar_year}-{result.lunar_month:02d}-{result.lunar_day:02d}{leap_indicator}"
     )
-    # Show early Zi hour adjustment note if applicable
     if result.early_zi_hour_adjusted:
         print(f"{Colors.WARNING}Note:{Colors.ENDC} Birth time is in early Zi hour (23:00-23:59).")
         print("      Traditional Chinese calendar counts this as the next day.")
@@ -72,15 +57,8 @@ def display_gregorian_to_lunar(result: GregorianToLunarResult) -> None:
 
 
 def display_lunar_to_gregorian(result: LunarToGregorianResult) -> None:
-    """
-    Display the result of Lunar to Gregorian conversion with formatting.
-
-    Args:
-        result: LunarToGregorianResult object
-    """
     print(f"\n{Colors.BOLD}{'=' * 70}{Colors.ENDC}\n")
 
-    # Original Lunar Date Section
     print(f"{Colors.BOLD}{Colors.OKGREEN}CHINESE CALENDAR (Lunar){Colors.ENDC}")
     leap_indicator = (
         f" {Colors.WARNING}{result.chinese.leap_month_indicator}{Colors.ENDC}"
@@ -100,7 +78,6 @@ def display_lunar_to_gregorian(result: LunarToGregorianResult) -> None:
     print(f"{Colors.OKCYAN}Day of Week:{Colors.ENDC} {result.chinese.day_of_week}")
     print()
 
-    # Converted Western Date Section
     print(f"{Colors.BOLD}{Colors.OKBLUE}WESTERN CALENDAR (Solar){Colors.ENDC}")
     print(
         f"{Colors.OKCYAN}Date:{Colors.ENDC} {result.gregorian_year}-{result.gregorian_month:02d}-{result.gregorian_day:02d}"
@@ -114,10 +91,4 @@ def display_lunar_to_gregorian(result: LunarToGregorianResult) -> None:
 
 
 def display_error(message: str) -> None:
-    """
-    Display an error message with formatting.
-
-    Args:
-        message: Error message to display
-    """
     print(f"\n{Colors.FAIL}{Colors.BOLD}ERROR:{Colors.ENDC} {message}\n")

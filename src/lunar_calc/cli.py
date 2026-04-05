@@ -1,5 +1,3 @@
-"""Interactive CLI for calendar conversion using questionary."""
-
 import questionary
 
 from .converters import gregorian_to_lunar, lunar_to_gregorian
@@ -7,24 +5,13 @@ from .display import display_error, display_gregorian_to_lunar, display_lunar_to
 
 
 def get_integer_input(prompt: str, min_val: int, max_val: int) -> int | None:
-    """
-    Get validated integer input from user.
-
-    Args:
-        prompt: Prompt message
-        min_val: Minimum acceptable value
-        max_val: Maximum acceptable value
-
-    Returns:
-        Integer value or None if user cancels
-    """
     while True:
         response = questionary.text(prompt).ask()
 
-        if response is None:  # User cancelled
+        if response is None:
             return None
 
-        if response.strip() == "":  # Allow empty for optional fields
+        if response.strip() == "":
             return None
 
         try:
@@ -37,10 +24,8 @@ def get_integer_input(prompt: str, min_val: int, max_val: int) -> int | None:
 
 
 def gregorian_to_lunar_flow() -> None:
-    """Handle the Western to Lunar conversion flow."""
     print("\n--- Western to Chinese Lunar Calendar ---")
 
-    # Get date components
     year = get_integer_input("Enter Western year (e.g., 1990): ", 1900, 2100)
     if year is None:
         return
@@ -53,7 +38,6 @@ def gregorian_to_lunar_flow() -> None:
     if day is None:
         return
 
-    # Ask if user wants to include time
     include_time = questionary.confirm(
         "Do you want to include time for more precision?", default=False
     ).ask()
@@ -70,7 +54,6 @@ def gregorian_to_lunar_flow() -> None:
         if minute is None:
             return
 
-    # Perform conversion
     try:
         result = gregorian_to_lunar(year, month, day, hour, minute)
         display_gregorian_to_lunar(result)
@@ -79,10 +62,8 @@ def gregorian_to_lunar_flow() -> None:
 
 
 def lunar_to_gregorian_flow() -> None:
-    """Handle the Lunar to Western conversion flow."""
     print("\n--- Chinese Lunar to Western Calendar ---")
 
-    # Get date components
     year = get_integer_input("Enter Lunar year (e.g., 1990): ", 1900, 2100)
     if year is None:
         return
@@ -95,10 +76,8 @@ def lunar_to_gregorian_flow() -> None:
     if day is None:
         return
 
-    # Ask about leap month
     is_leap = questionary.confirm("Is this a leap month (闰月)?", default=False).ask()
 
-    # Ask if user wants to include time
     include_time = questionary.confirm(
         "Do you want to include time for more precision?", default=False
     ).ask()
@@ -115,7 +94,6 @@ def lunar_to_gregorian_flow() -> None:
         if minute is None:
             return
 
-    # Perform conversion
     try:
         result = lunar_to_gregorian(year, month, day, is_leap, hour, minute)
         display_lunar_to_gregorian(result)
@@ -124,7 +102,6 @@ def lunar_to_gregorian_flow() -> None:
 
 
 def run_cli() -> None:
-    """Run the interactive CLI application."""
     print("\n🌙 Lunar Calendar Birthday Converter 🌙")
     print("Convert between Western and Chinese Lunar calendars\n")
 
@@ -148,5 +125,4 @@ def run_cli() -> None:
         elif choice == "Chinese Lunar to Western":
             lunar_to_gregorian_flow()
 
-        # Add spacing before returning to menu
         input("\nPress Enter to continue...")

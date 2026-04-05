@@ -1,5 +1,3 @@
-"""Lunar Calendar Birthday Converter - CLI tool for Gregorian/Lunar calendar conversion."""
-
 __version__ = "1.0.0"
 
 from .chinese_astrology import ChineseAstrology, get_chinese_astrology

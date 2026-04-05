@@ -1,12 +1,9 @@
-"""Entry point for the lunar-calc CLI application."""
-
 import sys
 
 from .cli import run_cli
 
 
 def main() -> None:
-    """Main entry point for the application."""
     try:
         run_cli()
     except KeyboardInterrupt:
