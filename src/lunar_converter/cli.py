@@ -6,12 +6,13 @@ from .display import display_error, display_gregorian_to_lunar, display_lunar_to
 
 def get_integer_input(prompt: str, min_val: int, max_val: int) -> int | None:
     while True:
-        response = questionary.text(prompt).ask()
+        response = questionary.text(
+            prompt,
+            qmark="",
+            validate=lambda v: True if v.strip() else "Please enter a number",
+        ).ask()
 
         if response is None:
-            return None
-
-        if response.strip() == "":
             return None
 
         try:
@@ -39,7 +40,7 @@ def gregorian_to_lunar_flow() -> None:
         return
 
     include_time = questionary.confirm(
-        "Do you want to include time for more precision?", default=False
+        "Do you want to include time for more precision?", default=False, qmark=""
     ).ask()
 
     hour = None
@@ -76,10 +77,10 @@ def lunar_to_gregorian_flow() -> None:
     if day is None:
         return
 
-    is_leap = questionary.confirm("Is this a leap month (闰月)?", default=False).ask()
+    is_leap = questionary.confirm("Is this a leap month (闰月)?", default=False, qmark="").ask()
 
     include_time = questionary.confirm(
-        "Do you want to include time for more precision?", default=False
+        "Do you want to include time for more precision?", default=False, qmark=""
     ).ask()
 
     hour = None
@@ -105,24 +106,20 @@ def run_cli() -> None:
     print("\n🌙 Lunar Calendar Birthday Converter 🌙")
     print("Convert between Western and Chinese Lunar calendars\n")
 
-    while True:
-        choice = questionary.select(
-            "Select conversion type:",
-            choices=[
-                "Western to Chinese Lunar",
-                "Chinese Lunar to Western",
-                "Exit",
-            ],
-            use_arrow_keys=True,
-        ).ask()
+    choice = questionary.select(
+        "Select conversion type:",
+        choices=[
+            "Western to Chinese Lunar",
+            "Chinese Lunar to Western",
+        ],
+        use_arrow_keys=True,
+        qmark="",
+    ).ask()
 
-        if choice is None or choice == "Exit":
-            print("\nGoodbye! 再见!\n")
-            break
+    if choice is None:
+        return
 
-        if choice == "Western to Chinese Lunar":
-            gregorian_to_lunar_flow()
-        elif choice == "Chinese Lunar to Western":
-            lunar_to_gregorian_flow()
-
-        input("\nPress Enter to continue...")
+    if choice == "Western to Chinese Lunar":
+        gregorian_to_lunar_flow()
+    elif choice == "Chinese Lunar to Western":
+        lunar_to_gregorian_flow()

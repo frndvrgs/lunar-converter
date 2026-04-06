@@ -4,10 +4,10 @@
 
 Gregorian and Chinese Lunar calendar converter with astrological details.
 
-## Install
+## Installation
 
 ```bash
-pip install lunar-converter
+uv tool install lunar-converter
 ```
 
 ## Usage

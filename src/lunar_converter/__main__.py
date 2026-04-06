@@ -7,7 +7,7 @@ def main() -> None:
     try:
         run_cli()
     except KeyboardInterrupt:
-        print("\n\nInterrupted by user. Goodbye! 再见!\n")
+        print("\n")
         sys.exit(0)
     except Exception as e:
         print(f"\n\nUnexpected error: {e}\n")
