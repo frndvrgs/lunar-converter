@@ -53,7 +53,6 @@ def display_gregorian_to_lunar(result: GregorianToLunarResult) -> None:
     print(f"{Colors.OKCYAN}Ming (命):{Colors.ENDC} {result.chinese.ming}")
     print(f"{Colors.OKCYAN}Day of Week:{Colors.ENDC} {result.chinese.day_of_week}")
     print()
-    print(f"{Colors.BOLD}{'=' * 70}{Colors.ENDC}\n")
 
 
 def display_lunar_to_gregorian(result: LunarToGregorianResult) -> None:
@@ -87,7 +86,6 @@ def display_lunar_to_gregorian(result: LunarToGregorianResult) -> None:
         f"{Colors.OKCYAN}Sun Sign:{Colors.ENDC} {result.western.sun_sign} ({result.western.sun_sign_element})"
     )
     print()
-    print(f"{Colors.BOLD}{'=' * 70}{Colors.ENDC}\n")
 
 
 def display_error(message: str) -> None:
