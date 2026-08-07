@@ -1,6 +1,6 @@
 [project]
 name = "lunar-converter"
-version = "0.1.1"
+version = "0.1.2"
 description = "Gregorian and Chinese Lunar calendar converter with astrological details"
 readme = "README.md"
 license = "MIT"
